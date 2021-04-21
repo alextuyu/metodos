@@ -1,0 +1,116 @@
+
+### METODO DE LA SECANTE
+import math
+def funcion (x):
+    return (math.pow (2.718, -(math.pow(x,2)))-x);
+
+x0=0
+x1=1
+i=1
+print("i|    ""xi-1        " "xi        " "f(xi-1)        " "f(xi)        " "f(xi-1 - xi)        " "xi+1        " "error    ")
+
+while True:
+    fx0=funcion(x0)
+    fx1=funcion(x1)
+    fx0menosx1=x0-x1
+    fx2=(x0-(fx0*(x1-x0))/(fx1-fx0))
+    error=abs((fx2-x1)/fx2)#funcion abs = valor absoluto
+    print(i,"    ""{:.4f}".format(x0),"    ""{:.4f}".format(x1),"    ""{:.4f}".format(fx0),"       ""{:.4f}".format(fx1),"        ""{:.4f}".format(fx0menosx1),"        ""{:.4f}".format(fx2),"         ""{:.4f}".format(error),"%")
+    if i>10 or error<=0.08: #defino la cantidad de iteraciones y la cota de error
+        break
+    x0=x1
+    x1=fx2
+    i=i+1
+
+
+# In[39]:
+
+
+### METODO NEWTON
+import math
+def funcion (x):
+    return math.pow (2.718, -x)-x;
+def funcion2 (x):
+    return -(math.pow (2.718, -x))-1;
+x0=0
+x1=0
+i=1
+print("i|    ""xi        " "Fxi        " "f´xi            " "xi+1           " "error        ")
+while True:
+    fxi=funcion(x0)
+    finvxi=funcion2(x0)#funcion inversa
+    ximas1=x0-(fxi/finvxi)
+    error=abs((ximas1-x0)/ximas1)
+    print(i,"    ""{:.4f}".format(x0),"    ""{:.4f}".format(fxi),"    ""{:.4f}".format(finvxi),"       ""{:.4f}".format(ximas1),"        ""{:.4f}".format(error))
+    if i>10 or error<=0.01: #defino la cantidad de iteraciones y la cota de error
+        break
+    x0=ximas1
+    i=i+1
+
+
+# In[43]:
+
+
+### Metodo punto fijo
+
+import math
+def funcion (x):
+    return math.pow (2.718, -x)-x;
+
+def funcion2 (x):
+    return math.pow (2.718, -x);
+
+x0=0
+i=0
+print("i|    ""xi        " "xi+1-gx        " "fx           " "error        ")
+
+while True:
+    gx=funcion2(x0)
+    fx=funcion(gx)
+    error=abs((gx-x0)/gx)
+    print(i,"    ""{:.4f}".format(x0),"    ""{:.4f}".format(gx),"    ""{:.4f}".format(fx),"       ","{:.4f}".format(error))
+    if i>10 or error<=0.01: #defino la cantidad de iteraciones y la cota de error
+        break
+        
+    x0=gx
+    i=i+1
+
+
+# In[50]:
+
+
+### Metodo biseccion 
+
+import math
+def funcion (x):
+    return x**3 + 4*x**2-10
+xi=1
+xs=2
+i=0
+error=1
+xranterior=0
+print("i|    ""xi        " "xs        " "xr        " "fxi        ""fxr        ""1x2        ""error        ")
+while error > 0.01 and i < maxiteraciones:
+    xr = (xi + xs) / 2
+    fxi = funcion(xi)
+    fxr = funcion(xr)
+    comp = fxi * fxr
+    error = (xr-xranterior)/xr
+    xranterior = xr
+    if error < 0:
+        error = error*(-1)
+    i += 1
+    print(i,"    ""{:.4f}".format(xi),"    ""{:.4f}".format(xs),"    ""{:.4f}".format(xr),"       ","{:.4f}".format(fxi),"    ""{:.4f}".format(fxr),"    ""{:.4f}".format(comp),"    ""{:.4f}".format(error))
+    if comp < 0:
+        xs = xr
+    elif comp > 0:
+        xi = xr
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
